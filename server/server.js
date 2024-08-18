@@ -12,7 +12,7 @@ dotenv.config();
 app.use(express.static("public"));
 app.use(
   cors({
-    origin: "http://localhost:5173",
+    origin: "https://noir-eud9.onrender.com",
   })
 );
 app.use(cookieParser());
