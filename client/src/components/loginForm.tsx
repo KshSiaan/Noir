@@ -90,23 +90,23 @@ function LoginForm() {
         onSubmit={handleSubmit}
       >
         <div className="w-full h-full flex flex-col flex-wrap justify-around items-center bg-slate-100 dark:bg-inherit rounded-md">
-          <h1 className="text-primary font-kolker text-6xl">
-            Welcome to <span className="text-8xl">NoiR</span>
+          <h1 className="text-primary font-kolker text-3xl md:text-6xl">
+            Welcome to <span className="text-5xl md:text-8xl">NoiR</span>
           </h1>
 
           <input
             type="text"
             name="username"
             id="username"
-            className="bg-inherit border-b-2 border-slate-500 outline-none text-xl px-4 py-2 pr-8"
+            className="bg-inherit border-b-2 border-slate-500 outline-none text-sm md:text-xl px-4 py-2 pr-8 w-[80%] md:w-fit"
             placeholder="Username"
             ref={unRef}
           />
-          <div className="border-b-2 border-slate-500 flex flex-row flex-wrap justify-between items-center">
+          <div className="border-b-2 border-slate-500 flex flex-row flex-wrap justify-between items-center w-[80%] md:w-fit">
             <input
               type="password"
               name=""
-              className="bg-inherit outline-none w-[80%] text-xl px-4 py-2"
+              className="bg-inherit outline-none text-sm md:text-xl w-[80%] px-4 py-2"
               placeholder="Password"
               ref={passInpRef}
             />

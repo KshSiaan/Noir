@@ -108,6 +108,11 @@ export default function MainApp() {
 
   socket.on("connect", () => {
     socket.emit("fresh");
+    if (chatDiv.current) {
+      requestAnimationFrame(() => {
+        chatDiv.current!.scrollTop = chatDiv.current!.scrollHeight;
+      });
+    }
   });
 
   function checkEnter(event: React.KeyboardEvent) {
@@ -115,12 +120,25 @@ export default function MainApp() {
       sendText();
     }
   }
+  function reSetIcons() {
+    console.log("taken aways");
+    if (mainInp.current) {
+      if (mainInp.current.value == "") {
+        setSendShow(
+          <>
+            <Image size={28} className="cursor-pointer" />
+            <Sparkles size={28} className="cursor-pointer" />
+          </>
+        );
+      }
+    }
+  }
 
   return (
     <>
       <Navbar />
 
-      <div className="h-screen w-full pt-[64px] flex flex-row justify-start items-start">
+      <div className="h-dvh w-full pt-[64px] flex flex-row justify-start items-start">
         <div className="hidden md:flex md:w-1/5 md:h-full md:text-zinc-400 md:border-r md:flex-col md:justify-between md:items-start">
           <div className="h-[90%] w-full">
             {menuStuffs.map((item, index) => (
@@ -156,40 +174,48 @@ export default function MainApp() {
             ref={chatDiv}
           >
             {messages?.map((item, index) => (
-              <div
-                className="sender px-4 py-6 flex flec-row flex-wrap justify-start items-center border-t"
-                key={index}
-              >
-                <div className="px-4">
-                  <Avatar>
-                    {item.user == "shafayat" ? (
-                      <AvatarImage src={users.shafayat.dp} />
-                    ) : (
-                      <AvatarImage src={users.user.dp} />
-                    )}
-                  </Avatar>
+              <>
+                <div
+                  className="sender px-4 py-4 flex flex-col flex-wrap justify-start items-start border-t"
+                  key={index}
+                >
+                  <p className="px-4 pb-4 font-semibold text-zinc-600 capitalize">
+                    {item.user}
+                  </p>
+                  <div className="w-full flex flex-row flex-wrap justify-start items-start">
+                    <div className="w-[20%] md:w-fit px-4">
+                      <Avatar>
+                        {item.user == "shafayat" ? (
+                          <AvatarImage src={users.shafayat.dp} />
+                        ) : (
+                          <AvatarImage src={users.user.dp} />
+                        )}
+                      </Avatar>
+                    </div>
+                    <p className="w-[80%] md:w-[85%] message">{item.message}</p>
+                  </div>
                 </div>
-                <p className="w-[85%] message">{item.message}</p>
-              </div>
+              </>
             ))}
           </div>
 
-          <div className="h-[74px] w-full  flex flex-wrap justify-center items-center">
+          <div className="h-[64px] w-full  flex flex-wrap justify-center items-center">
             <div className="h-4/5 w-[90%] md:w-4/5 border rounded-full bg-inherit flex flex-row flex-wrap justify-between items-center">
-              <div className="w-[12%]  md:w-[7%] h-full flex flex-wrap justify-center items-center ">
+              <div className="w-[16%] md:w-[6%] h-full flex flex-wrap justify-center items-center ">
                 <Smile size={28} />
               </div>
               <input
                 type="text"
                 name=""
                 id=""
-                className="w-[67%] md:w-4/5 py-3 font-poppins bg-inherit outline-none"
+                className="w-[60%] md:w-4/5 py-3 font-poppins bg-inherit outline-none"
                 placeholder="Message.."
                 ref={mainInp}
                 onChange={mainInpChange}
                 onKeyDown={checkEnter}
+                onBlur={reSetIcons}
               />
-              <div className="w-[16%] md:w-[10%] h-full flex flex-row justify-center items-center pr-4 space-x-2 md:space-x-2">
+              <div className="w-[22%] md:w-[10%] h-full flex flex-row justify-center items-center pr-4 space-x-2 md:space-x-2">
                 {sendShow}
 
                 {/* <p className="font-medium text-blue-700">Send</p> */}
