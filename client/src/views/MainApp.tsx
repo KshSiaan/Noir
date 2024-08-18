@@ -199,7 +199,7 @@ export default function MainApp() {
             ))}
           </div>
 
-          <div className="h-[64px] w-full  flex flex-wrap justify-center items-center">
+          <div className="h-[64px] w-full bg-red-600  flex flex-wrap justify-center items-center">
             <div className="h-4/5 w-[90%] md:w-4/5 border rounded-full bg-inherit flex flex-row flex-wrap justify-between items-center">
               <div className="w-[16%] md:w-[6%] h-full flex flex-wrap justify-center items-center ">
                 <Smile size={28} />
