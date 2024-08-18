@@ -81,6 +81,7 @@ export default function MainApp() {
     }
   }
 
+  const chatDiv = useRef<HTMLDivElement>(null);
   const sendText = () => {
     if (mainInp.current) {
       const finalInpVal = mainInp.current.value;
@@ -98,6 +99,11 @@ export default function MainApp() {
 
   socket.on("serve", (data) => {
     setMessages(data);
+    if (chatDiv.current) {
+      requestAnimationFrame(() => {
+        chatDiv.current!.scrollTop = chatDiv.current!.scrollHeight;
+      });
+    }
   });
 
   socket.on("connect", () => {
@@ -145,7 +151,10 @@ export default function MainApp() {
         </div>
 
         <div className="w-full md:w-4/5 h-full bg-background flex flex-col flex-wrap justify-end">
-          <div className="h-[80%] w-full overflow-y-auto custom-scrollbar">
+          <div
+            className="h-[80%] w-full overflow-y-auto custom-scrollbar"
+            ref={chatDiv}
+          >
             {messages?.map((item, index) => (
               <div
                 className="sender px-4 py-6 flex flec-row flex-wrap justify-start items-center border-t"
