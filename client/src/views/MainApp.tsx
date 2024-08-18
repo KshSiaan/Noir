@@ -84,16 +84,16 @@ export default function MainApp() {
   const chatDiv = useRef<HTMLDivElement>(null);
   const sendText = () => {
     if (mainInp.current) {
-      const finalInpVal = mainInp.current.value;
-      const finalData = {
-        user: localStorage.getItem("username"),
-        message: finalInpVal,
-      };
+      if (mainInp.current.value != "") {
+        const finalInpVal = mainInp.current.value;
+        const finalData = {
+          user: localStorage.getItem("username"),
+          message: finalInpVal,
+        };
 
-      socket.emit("talk", finalData, () => {});
-    }
-    if (mainInp.current) {
-      mainInp.current.value = "";
+        socket.emit("talk", finalData, () => {});
+        mainInp.current.value = "";
+      }
     }
   };
 
@@ -198,27 +198,31 @@ export default function MainApp() {
               </>
             ))}
           </div>
+          <div className="h-[64px] w-full relative">
+            <div className="h-[64px] w-full md:flex flex-wrap justify-center items-center ">
+              <div className="h-4/5 absolute md:relative bottom-0 left-[50%] translate-x-[-50%] md:left-0 md:translate-x-0 w-[90%] mx-auto md:w-4/5 mb-6 border rounded-full bg-background flex flex-row flex-wrap justify-between items-center">
+                <div className="w-[16%] md:w-[6%] h-full flex flex-wrap justify-center items-center ">
+                  <Smile size={28} />
+                </div>
+                <input
+                  type="text"
+                  name=""
+                  id=""
+                  className="w-[60%] md:w-4/5 py-3 font-poppins bg-inherit outline-none"
+                  placeholder="Message.."
+                  ref={mainInp}
+                  onChange={mainInpChange}
+                  onKeyDown={checkEnter}
+                  onBlur={reSetIcons}
+                  autoComplete="off"
+                  autoSave="off"
+                  autoCorrect="off"
+                />
+                <div className="w-[22%] md:w-[10%] h-full flex flex-row justify-center items-center pr-4 space-x-2 md:space-x-2">
+                  {sendShow}
 
-          <div className="h-[64px] w-full bg-red-600  flex flex-wrap justify-center items-center">
-            <div className="h-4/5 w-[90%] md:w-4/5 border rounded-full bg-inherit flex flex-row flex-wrap justify-between items-center">
-              <div className="w-[16%] md:w-[6%] h-full flex flex-wrap justify-center items-center ">
-                <Smile size={28} />
-              </div>
-              <input
-                type="text"
-                name=""
-                id=""
-                className="w-[60%] md:w-4/5 py-3 font-poppins bg-inherit outline-none"
-                placeholder="Message.."
-                ref={mainInp}
-                onChange={mainInpChange}
-                onKeyDown={checkEnter}
-                onBlur={reSetIcons}
-              />
-              <div className="w-[22%] md:w-[10%] h-full flex flex-row justify-center items-center pr-4 space-x-2 md:space-x-2">
-                {sendShow}
-
-                {/* <p className="font-medium text-blue-700">Send</p> */}
+                  {/* <p className="font-medium text-blue-700">Send</p> */}
+                </div>
               </div>
             </div>
           </div>
