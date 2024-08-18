@@ -30,12 +30,6 @@ const io = socketio(expServer, {
 });
 
 app.get("/", (req, res) => {
-  const expirationDate = new Date();
-  expirationDate.setDate(expirationDate.getDate() + 2);
-
-  res.cookie("username", "nohara", {
-    expires: expirationDate,
-  });
   res.end();
 });
 app.post("/", (req, res) => {
@@ -85,7 +79,6 @@ io.on("connect", (socket) => {
 
 function checkAccess(un, pass) {
   if (un == "shafayat" && pass == "hunter") {
-    console.log("its correct");
     return true;
   } else if (un == "guest" && pass == "orangejuice") {
     return true;

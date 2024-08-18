@@ -45,7 +45,6 @@ function LoginForm() {
     e.preventDefault();
 
     if (!unRef.current || !passInpRef.current) {
-      console.error("Missing references");
       return;
     }
 
@@ -56,8 +55,6 @@ function LoginForm() {
       console.error("Username or password is empty");
       return;
     }
-
-    console.log("The username and password are: " + finalUn + " " + finalpass);
 
     try {
       const response = await fetch("http://localhost:3000", {
@@ -74,7 +71,6 @@ function LoginForm() {
       if (!response.ok) {
         throw new Error("Network response was not ok");
       } else {
-        console.log("It worked acctually");
         localStorage.setItem("username", finalUn);
         Navigate("/app");
       }

@@ -23,11 +23,10 @@ export default function MainApp() {
     user = users.shafayat;
     listener = users.user;
   } else if (localStorage.getItem("username") == "guest") {
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     user = users.user;
     listener = users.shafayat;
   }
-
-  console.log(user);
 
   const Navigate = useNavigate();
   useEffect(() => {
@@ -94,9 +93,7 @@ export default function MainApp() {
         message: finalInpVal,
       };
 
-      socket.emit("talk", finalData, () => {
-        console.log("data was sent to the server");
-      });
+      socket.emit("talk", finalData, () => {});
     }
     if (mainInp.current) {
       mainInp.current.value = "";
@@ -104,7 +101,6 @@ export default function MainApp() {
   };
 
   socket.on("serve", (data) => {
-    console.log(data);
     setMessages(data);
   });
 
