@@ -192,7 +192,9 @@ export default function MainApp() {
                         )}
                       </Avatar>
                     </div>
-                    <p className="w-[80%] md:w-[85%] message">{item.message}</p>
+                    <p className="w-[80%] md:w-[85%] message break-words">
+                      {item.message}
+                    </p>
                   </div>
                 </div>
               </>
