@@ -26,7 +26,7 @@ const expServer = app.listen(process.env.PORT, () => {
 });
 
 const io = socketio(expServer, {
-  cors: ["http://localhost:3000"],
+  cors: ["https://noir-fgru.onrender.com"],
 });
 
 app.get("/", (req, res) => {
@@ -58,8 +58,6 @@ app.post("/", (req, res) => {
 });
 
 io.on("connect", (socket) => {
-  console.log(socket.id + " is connected");
-
   socket.on("talk", (data) => {
     updateData(data);
 
@@ -69,8 +67,6 @@ io.on("connect", (socket) => {
   });
 
   socket.on("fresh", () => {
-    // console.log(data);
-
     var filtered = filterData(chatData);
 
     io.emit("serve", filtered);

@@ -16,15 +16,11 @@ import { useNavigate } from "react-router-dom";
 import users from "@/functions/users";
 
 export default function MainApp() {
-  let user: { id: number; name: string; dp: string } | null = null;
   let listener: { id: number; name: string; dp: string } | null = null;
 
   if (localStorage.getItem("username") == "shafayat") {
-    user = users.shafayat;
     listener = users.user;
   } else if (localStorage.getItem("username") == "guest") {
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    user = users.user;
     listener = users.shafayat;
   }
 
