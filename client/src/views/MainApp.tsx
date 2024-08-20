@@ -91,14 +91,13 @@ export default function MainApp() {
       if (mainInp.current.value == "") {
         setSendShow(sendShowBasic);
       } else {
-        setSendShow(
-          <Send size={28} onClick={sendText} className="cursor-pointer" />
-        );
+        setSendShow(sendShowSend);
       }
     }
   }
 
   const chatDiv = useRef<HTMLDivElement>(null);
+
   const sendText = () => {
     if (mainInp.current) {
       if (mainInp.current.value != "") {
@@ -112,7 +111,12 @@ export default function MainApp() {
         mainInp.current.value = "";
       }
     }
+
+    setSendShow(sendShowBasic);
   };
+  const sendShowSend = (
+    <Send size={28} onClick={sendText} className="cursor-pointer" />
+  );
   function sendSparkle() {
     console.log("lol");
     const finalData = {
@@ -337,6 +341,7 @@ export default function MainApp() {
                                 if (mainInp.current) {
                                   mainInp.current.value += item;
                                 }
+                                setSendShow(sendShowSend);
                               }}
                             >
                               {item}
