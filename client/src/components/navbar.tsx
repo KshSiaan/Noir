@@ -36,7 +36,7 @@ export default function Navbar() {
         </div>
         <div className="">
           <Sheet>
-            <SheetTrigger className="h-[28px] w-[28px] flex flex-col justify-around items-end md:hidden">
+            <SheetTrigger className="h-[24px] w-[24px] flex flex-col justify-around items-end md:hidden">
               <span className="block w-[70%] h-[2px] bg-white border-2 border-white rounded-md"></span>
               <span className="block w-[40%] h-[2px] border-2 border-white rounded-md"></span>
               <span className="block w-[100%] h-[2px] border-2 border-white rounded-md"></span>
