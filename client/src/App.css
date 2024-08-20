@@ -1,0 +1,20 @@
+/* width */
+.emojiScroller::-webkit-scrollbar {
+  width:5px;
+}
+
+/* Track */
+.emojiScroller::-webkit-scrollbar-track {
+  background: #333;
+}
+
+/* Handle */
+.emojiScroller::-webkit-scrollbar-thumb {
+  background: #131313;
+    cursor: s-resize;
+}
+
+/* Handle on hover */
+.emojiScroller::-webkit-scrollbar-thumb:hover {
+  background: #555555;
+}

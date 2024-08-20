@@ -75,6 +75,8 @@ module.exports = {
     fontFamily: {
       poppins: ["Poppins", "sans-serif"],
       kolker: ["Kolker Brush", "cursive"],
+      emoji: ["Noto Emoji", "sans-serif"],
+      arialEmoji: ["system-ui", "Noto Emoji", "sans-serif"],
     },
   },
   plugins: [require("tailwindcss-animate")],
