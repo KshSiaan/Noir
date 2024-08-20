@@ -70,6 +70,8 @@ export default function MainApp() {
   ];
 
   const mainInp = useRef<HTMLInputElement>(null);
+  const emojiRev = useRef<SVGSVGElement>(null);
+  const emojiBox = useRef<HTMLDivElement>(null);
 
   interface Message {
     user: string;
@@ -232,6 +234,19 @@ export default function MainApp() {
     },
   ];
 
+  window.addEventListener("click", (e: MouseEvent) => {
+    if (
+      (emojiBox.current && emojiBox.current.contains(e.target as Node)) ||
+      (emojiRev.current && emojiRev.current.contains(e.target as Node))
+    ) {
+      //
+    } else {
+      if (!showEmo) {
+        setshowEmo(true);
+      }
+    }
+  });
+
   return (
     <>
       <Navbar />
@@ -288,7 +303,7 @@ export default function MainApp() {
                       )}
                     </Avatar>
                   </div>
-                  <p className="w-[80%] md:w-[85%] message break-words font-arialEmoji">
+                  <p className="w-[80%] md:w-[85%] message break-words font-systemEmoji">
                     {item.message.length === 1
                       ? checkEmoji(item.message)
                       : item.message}
@@ -303,11 +318,12 @@ export default function MainApp() {
                 <div className="w-[16%] md:w-[6%] h-full flex flex-wrap justify-center items-center ">
                   {/* EmojiBox */}
                   <div
+                    ref={emojiBox}
                     className={
                       showEmo
                         ? "hidden"
                         : "" +
-                          `absolute bottom-[64px] left-0 h-[212px] w-[90dvw] md:h-[352px] md:w-[612px] bg-background border-2 border-zinc-800 rounded-md p-[4px]`
+                          `emojiBox absolute bottom-[64px] left-0 h-[212px] w-[90dvw] md:h-[352px] md:w-[612px] bg-background border-2 border-zinc-800 rounded-md p-[4px]`
                     }
                   >
                     <div className="h-[200px] w-full md:h-[340px] md:w-[600px] bg-zinc-900 rounded-sm flex flex-wrap flex-col md:flex-row-reverse justify-start items-start">
@@ -315,8 +331,13 @@ export default function MainApp() {
                         <div className=" h-full w-full font-emoji text-2xl grid  grid-cols-6 md:grid-cols-10 gap-1 md:gap-2 justify-center items-center">
                           {emoji.map((item, index) => (
                             <span
-                              className="aspect-square flex justify-center items-center"
+                              className="aspect-square flex justify-center items-center cursor-pointer"
                               key={index}
+                              onClick={() => {
+                                if (mainInp.current) {
+                                  mainInp.current.value += item;
+                                }
+                              }}
                             >
                               {item}
                             </span>
@@ -344,7 +365,8 @@ export default function MainApp() {
 
                   <Smile
                     size={28}
-                    className="cursor-pointer"
+                    ref={emojiRev}
+                    className="cursor-pointer emojiReveal"
                     onClick={() => {
                       if (showEmo) {
                         setshowEmo(false);
@@ -358,7 +380,7 @@ export default function MainApp() {
                   type="text"
                   name=""
                   id=""
-                  className="w-[60%] md:w-4/5 py-3 font-poppins bg-inherit outline-none"
+                  className="w-[60%] md:w-4/5 py-3 font-poppinsEmoji bg-inherit outline-none"
                   placeholder="Message.."
                   ref={mainInp}
                   onChange={mainInpChange}
