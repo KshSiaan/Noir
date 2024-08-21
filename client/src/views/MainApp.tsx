@@ -129,6 +129,7 @@ export default function MainApp() {
 
   socket.on("serve", (data) => {
     setMessages(data);
+
     if (chatDiv.current) {
       requestAnimationFrame(() => {
         chatDiv.current!.scrollTop = chatDiv.current!.scrollHeight;
@@ -151,7 +152,6 @@ export default function MainApp() {
     }
   }
   function reSetIcons() {
-    console.log("taken aways");
     if (mainInp.current) {
       if (mainInp.current.value == "") {
         setSendShow(sendShowBasic);
@@ -291,23 +291,38 @@ export default function MainApp() {
           >
             {messages?.map((item, index) => (
               <div
-                className="sender px-4 py-4 flex flex-col flex-wrap justify-start items-start border-t"
+                className={
+                  index > 0 && messages[index - 1].user == item.user
+                    ? "" +
+                      ` sender px-4 flex pb-2 flex-col flex-wrap justify-start items-start`
+                    : "border-t" +
+                      ` sender px-4 flex pt-4 flex-col flex-wrap justify-start items-start`
+                }
                 key={index}
               >
-                <p className="px-4 pb-4 font-semibold text-zinc-600 capitalize">
-                  {item.user}
-                </p>
+                {index > 0 && messages[index - 1].user == item.user ? (
+                  ""
+                ) : (
+                  <p className="px-4 pb-2 font-semibold text-zinc-600 capitalize">
+                    {item.user}
+                  </p>
+                )}
+
                 <div className="w-full flex flex-row flex-wrap justify-start items-start">
                   <div className="w-[20%] md:w-fit px-4">
-                    <Avatar>
-                      {item.user == "shafayat" ? (
-                        <AvatarImage src={users.shafayat.dp} />
-                      ) : (
-                        <AvatarImage src={users.user.dp} />
-                      )}
-                    </Avatar>
+                    {index > 0 && messages[index - 1].user == item.user ? (
+                      <div className="h-10 w-10"></div>
+                    ) : (
+                      <Avatar>
+                        {item.user == "shafayat" ? (
+                          <AvatarImage src={users.shafayat.dp} />
+                        ) : (
+                          <AvatarImage src={users.user.dp} />
+                        )}
+                      </Avatar>
+                    )}
                   </div>
-                  <p className="w-[80%] md:w-[85%] message break-words font-systemEmoji">
+                  <p className="w-[80%] md:w-[85%] py-2 message break-words font-systemEmoji">
                     {item.message.length === 1
                       ? checkEmoji(item.message)
                       : item.message}
