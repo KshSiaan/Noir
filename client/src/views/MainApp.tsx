@@ -294,9 +294,9 @@ export default function MainApp() {
                 className={
                   index > 0 && messages[index - 1].user == item.user
                     ? "" +
-                      ` sender px-4 flex pb-2 flex-col flex-wrap justify-start items-start`
+                      ` sender px-4 flex pb-4 flex-col flex-wrap justify-start items-start`
                     : "border-t" +
-                      ` sender px-4 flex pt-4 flex-col flex-wrap justify-start items-start`
+                      ` sender px-4 flex py-4 flex-col flex-wrap justify-start items-start`
                 }
                 key={index}
               >
