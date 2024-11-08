@@ -1,2 +1,2 @@
 # Noir
-user to user Chat app usin React, Node Js,Express Js.
+A real-time chat application built using React, Node.js, and Express.js, designed to provide seamless communication between users. The front-end leverages React to create a dynamic and responsive user interface, while the back-end is powered by Node.js and Express.js to handle real-time data exchange and user authentication. The application supports instant messaging, group chats, and notifications, ensuring smooth interaction between users. By utilizing WebSockets (or socket.io), it enables live chat functionality, ensuring messages are sent and received without delay.
